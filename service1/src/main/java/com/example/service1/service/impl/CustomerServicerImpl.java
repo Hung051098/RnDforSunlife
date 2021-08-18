@@ -1,4 +1,4 @@
-package com.example.configservice1.service.impl;
+package com.example.service1.service.impl;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.configservice1.model.Customer;
-import com.example.configservice1.repository.CustomerRepository;
-import com.example.configservice1.service.CustomerService;
+import com.example.service1.model.Customer;
+import com.example.service1.repository.CustomerRepository;
+import com.example.service1.service.CustomerService;
 
 
 @Service

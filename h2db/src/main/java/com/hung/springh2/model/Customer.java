@@ -1,4 +1,4 @@
-package com.example.configservice1.model;
+package com.hung.springh2.model;
 
 import java.util.Set;
 
@@ -40,7 +40,7 @@ public class Customer {
 	private String mobile_number;
 
 	@Column
-	private String create_dt;
+	private long create_dt;
 
 	public Integer getId() {
 		return id;
@@ -90,11 +90,11 @@ public class Customer {
 		this.mobile_number = mobile_number;
 	}
 
-	public String getCreate_dt() {
+	public long getCreate_dt() {
 		return create_dt;
 	}
 
-	public void setCreate_dt(String create_dt) {
+	public void setCreate_dt(long create_dt) {
 		this.create_dt = create_dt;
 	}
 

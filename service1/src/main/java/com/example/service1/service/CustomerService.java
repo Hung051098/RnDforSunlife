@@ -1,4 +1,4 @@
-package com.example.configservice1.service;
+package com.example.service1.service;
 
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;

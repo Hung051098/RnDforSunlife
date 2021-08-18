@@ -1,11 +1,11 @@
-package com.example.configservice1.rest;
+package com.example.service1.rest;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.configservice1.service.CustomerService;
+import com.example.service1.service.CustomerService;
 
 @RestController
 @RequestMapping("/customer")

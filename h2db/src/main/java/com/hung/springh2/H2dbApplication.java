@@ -1,13 +1,13 @@
-package com.example.configservice1;
+package com.hung.springh2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Configservice1Application {
+public class H2dbApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Configservice1Application.class, args);
+		SpringApplication.run(H2dbApplication.class, args);
 	}
 
 }
