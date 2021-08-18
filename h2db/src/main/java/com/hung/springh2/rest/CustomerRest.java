@@ -19,12 +19,12 @@ public class CustomerRest {
 	@Autowired
 	CustomerService customerService;
 
-	@RequestMapping("/list_customer")
+	@GetMapping("/list_customer")
 	public JSONObject getListCustomer() {
 		return customerService.getListCustomer();
 	}
 
-	@RequestMapping("/get_customer_by_id")
+	@GetMapping("/get_customer_by_id")
 	public JSONObject getCustomerById(@RequestParam int id) {
 		return customerService.getCustomerById(id);
 	}
