@@ -13,4 +13,8 @@ public interface CustomerService {
 
 	JSONObject addCustomer(AddCustomerRequest request);
 
+	JSONObject getCustomerById(int id);
+
+	JSONObject getListCustomerByFilter(String key_filter, String value_filter);
+
 }

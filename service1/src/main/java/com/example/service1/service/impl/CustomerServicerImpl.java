@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.service1.model.Customer;
 import com.example.service1.repository.CustomerRepository;
+import com.example.service1.repository.criteria.CustomnerRepositoryCriteria;
 import com.example.service1.service.CustomerService;
 
 
@@ -15,14 +16,23 @@ import com.example.service1.service.CustomerService;
 public class CustomerServicerImpl implements CustomerService {
 
 	@Autowired
-	CustomerRepository customerRepository;
+	CustomnerRepositoryCriteria customerRepositoryCriteria;
 	
 	@Override
 	public JSONObject getListCustomer() {
 		// TODO Auto-generated method stub
 		JSONObject data = new JSONObject();
-		List<Customer> lst = customerRepository.findAll();
+		List<Customer> lst = customerRepositoryCriteria.getCustomer();
 		data.put("data", lst);
+		return data;
+	}
+
+	@Override
+	public JSONObject getCustomerById(int id) {
+
+		JSONObject data = new JSONObject();
+		Customer entity = customerRepositoryCriteria.getCustomerById(id);
+		data.put("data", entity);
 		return data;
 	}
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.hung.springh2.model.Customer;
 import com.hung.springh2.model.User;
 import com.hung.springh2.repository.CustomerRepository;
+import com.hung.springh2.repository.criteria.CustomerRepositoryCriteria;
 import com.hung.springh2.request.AddCustomerRequest;
 import com.hung.springh2.service.CustomerService;
 
@@ -18,6 +19,9 @@ public class CustomerServicerImpl implements CustomerService {
 
 	@Autowired
 	CustomerRepository customerRepository;
+
+	@Autowired
+	CustomerRepositoryCriteria customerRepositoryCriteria;
 
 	@Override
 	public JSONObject getListCustomer() {
@@ -41,6 +45,23 @@ public class CustomerServicerImpl implements CustomerService {
 		customer = customerRepository.save(customer);
 		JSONObject data = new JSONObject();
 		data.put("customer", customer);
+		return data;
+	}
+
+	@Override
+	public JSONObject getCustomerById(int id) {
+
+		JSONObject data = new JSONObject();
+		Customer cus = customerRepositoryCriteria.getCustomerById(id);
+		data.put("data", cus);
+		return data;
+	}
+	
+	@Override
+	public JSONObject getListCustomerByFilter(String key_filter, String value_filter) {
+		JSONObject data = new JSONObject();
+		List<Customer> lst = customerRepositoryCriteria.getListCustomerFilter(key_filter, value_filter);
+		data.put("data", lst);
 		return data;
 	}
 }

@@ -8,4 +8,6 @@ public interface CustomerService {
 
 	JSONObject getListCustomer();
 
+	JSONObject getCustomerById(int id);
+
 }
