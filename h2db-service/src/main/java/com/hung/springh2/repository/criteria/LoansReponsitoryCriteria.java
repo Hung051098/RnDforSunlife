@@ -14,6 +14,7 @@ import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.hung.springh2.model.Customer;
@@ -28,17 +29,49 @@ public class LoansReponsitoryCriteria {
 		CriteriaBuilder cb  = em.getCriteriaBuilder();
 		CriteriaQuery<Loans> query = cb.createQuery(Loans.class);
 		Root<Loans> lroot = query.from(Loans.class);
-		Join<Loans, Customer> croot = lroot.join("customer");
 		/** chú ý:
 		 * lroot.get("customer") trong đó customer là tên biến của lớp Loans; 
 		 * croot.get("id") trong đó customer là tên biến của lớp Customer; 
 		 */
-		Predicate p1 = cb.equal(croot.get("id"), lroot.get("customer"));
+		Join<Loans, Customer> croot = lroot.join("customer");
 		Predicate p2 = cb.equal(lroot.get("customer"), id);
 		query.select(lroot)
-		.where(p1, p2);
+		.where(p2);
 		TypedQuery<Loans> typedQuery = em.createQuery(query); // query 
     	List<Loans> results = typedQuery.getResultList(); // trả về kết quả 
     	return results;
+	}
+	
+	public List<Loans> getListLoanByCustomerId2(int id) {
+		int pageSize = 2;
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Loans> criteriaQuery = criteriaBuilder
+		  .createQuery(Loans.class);
+		Root<Loans> from = criteriaQuery.from(Loans.class);
+		CriteriaQuery<Loans> select = criteriaQuery.select(from);
+		TypedQuery<Loans> typedQuery = em.createQuery(select);
+		typedQuery.setFirstResult(0);
+		typedQuery.setMaxResults(pageSize);
+		
+		List<Loans> loansList = typedQuery.getResultList();
+		return loansList;
+	}
+
+	public List<Object[]> countSelect(int id) {
+		CriteriaBuilder cb  = em.getCriteriaBuilder();
+		CriteriaQuery<Object[]> query = cb.createQuery(Object[].class);
+		Root<Loans> lroot = query.from(Loans.class);
+		query.multiselect(
+				cb.count(lroot.get("total_loan")), 
+				cb.avg(lroot.get("total_loan")));
+
+		Predicate p2 = cb.equal(lroot.get("customer"), id);
+		
+		query.where(p2); 
+		
+		
+		TypedQuery<Object[]> typedQuery = em.createQuery(query); // query 
+		List<Object[]> obj = typedQuery.getResultList();
+		return obj;
 	}
 }

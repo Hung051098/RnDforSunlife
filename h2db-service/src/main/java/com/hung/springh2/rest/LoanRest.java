@@ -27,4 +27,9 @@ public class LoanRest {
 	public JSONObject getListLoansByCustomerId(@RequestParam int id) {
 		return loansService.getListLoansByCustomerId(id);
 	}
+
+	@GetMapping("/count_loan_by_customer_id")
+	public JSONObject countLoansByCustomerId(@RequestParam int id) {
+		return loansService.countLoansByCustomerId(id);
+	}
 }

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hung.springh2.model.Customer;
-import com.hung.springh2.model.User;
 import com.hung.springh2.repository.CustomerRepository;
 import com.hung.springh2.repository.criteria.CustomerRepositoryCriteria;
 import com.hung.springh2.request.AddCustomerRequest;
@@ -62,6 +61,29 @@ public class CustomerServicerImpl implements CustomerService {
 		JSONObject data = new JSONObject();
 		List<Customer> lst = customerRepositoryCriteria.getListCustomerFilter(key_filter, value_filter);
 		data.put("data", lst);
+		return data;
+	}
+	
+	@Override
+	public JSONObject updateCustomerById(int id, AddCustomerRequest request) {
+		JSONObject data = new JSONObject();
+		Customer customer = customerRepositoryCriteria.getCustomerById(id);
+		customer.setName(request.getName());
+		customer.setCreate_dt(new Date().getTime());
+		customer.setEmail(request.getEmail());
+		customer.setMobile_number(request.getMobile_number());
+		customer.setPwd(request.getPwd());
+		customer.setRole(request.getRole());
+		customer = customerRepository.save(customer);
+		data.put("data", "success");
+		return data;
+	}
+	
+	@Override
+	public JSONObject deleteById(Integer id) {
+		JSONObject data = new JSONObject();
+		customerRepository.deleteById(id);
+		data.put("data", "success");
 		return data;
 	}
 }

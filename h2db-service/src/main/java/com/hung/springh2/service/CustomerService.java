@@ -17,4 +17,8 @@ public interface CustomerService {
 
 	JSONObject getListCustomerByFilter(String key_filter, String value_filter);
 
+	JSONObject updateCustomerById(int id, AddCustomerRequest request);
+
+	JSONObject deleteById(Integer id);
+
 }

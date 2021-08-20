@@ -8,12 +8,14 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
 import com.hung.springh2.model.Customer;
 import com.hung.springh2.model.Loans;
 import com.hung.springh2.repository.LoansRepository;
 import com.hung.springh2.repository.criteria.CustomerRepositoryCriteria;
 import com.hung.springh2.repository.criteria.LoansReponsitoryCriteria;
 import com.hung.springh2.service.LoansService;
+import com.hung.springh2.util.ConvertUtils;
 
 @Service
 public class LoansServicerImpl implements LoansService {
@@ -30,7 +32,7 @@ public class LoansServicerImpl implements LoansService {
 	public JSONObject addLoansByCustomerId(int id) {
 		JSONObject data = new JSONObject();
 		try {
-	        Customer cus = customerRepositoryCriteria.getCustomerById(id);
+			Customer cus = customerRepositoryCriteria.getCustomerById(id);
 			Loans loans = new Loans();
 			loans.setCreate_date(new Date().getTime());
 			loans.setCustomer(cus);
@@ -53,7 +55,7 @@ public class LoansServicerImpl implements LoansService {
 
 		JSONObject data = new JSONObject();
 		try {
-			List<Loans> lst = loansReponsitoryCriteria.getListLoanByCustomerId(id);
+			List<Loans> lst = loansReponsitoryCriteria.getListLoanByCustomerId2(id);
 			List<JSONObject> lstcon = new ArrayList<>();
 			for (Loans loans : lst) {
 
@@ -70,4 +72,25 @@ public class LoansServicerImpl implements LoansService {
 		return data;
 	}
 
+	@Override
+	public JSONObject countLoansByCustomerId(int id) {
+
+		JSONObject data = new JSONObject();
+		try {
+			List<Object[]> multiselect = loansReponsitoryCriteria.countSelect(id);
+			double count = 0d;
+			double avg = 0d;
+			for (Object[] objects : multiselect) {
+				System.out.println(new Gson().toJson(objects));
+				count =  ConvertUtils.toDouble(objects[0]);
+				avg =  ConvertUtils.toDouble(objects[1]);
+			}
+			data.put("count", count);
+			data.put("avg", avg);
+			return data;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return data;
+	}
 }
