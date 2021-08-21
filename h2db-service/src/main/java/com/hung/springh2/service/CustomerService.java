@@ -1,15 +1,17 @@
 package com.hung.springh2.service;
 
+import java.util.List;
+
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 
+import com.hung.springh2.dto.response.CustomerDTO;
 import com.hung.springh2.request.AddCustomerRequest;
-import com.hung.springh2.request.AddUserRequest;
 
 @Service
 public interface CustomerService {
 
-	JSONObject getListCustomer();
+	List<CustomerDTO> getListCustomer();
 
 	JSONObject addCustomer(AddCustomerRequest request);
 

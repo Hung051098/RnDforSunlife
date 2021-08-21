@@ -1,7 +1,6 @@
 package com.hung.springh2.model;
 
 import java.util.Collection;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,12 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 @Entity
 @Table(name = "customer")
-//@Data
-//@AllArgsConstructor
-//@NoArgsConstructor
+
 public class Customer {
 
 	@Id

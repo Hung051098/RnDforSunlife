@@ -1,46 +1,29 @@
-package com.hung.springh2.model;
+package com.hung.springh2.dto.response;
 
-import java.util.Set;
+import java.util.Collection;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import com.hung.springh2.model.Loans;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "customer")
-//@Data
-//@AllArgsConstructor
-//@NoArgsConstructor
-public class Customer {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CustomerDTO {
 	private Integer id;
 
-	@Column
 	private String email;
 
-	@Column
 	private String role;
 
-	@Column
 	private String pwd;
 
-	@Column
 	private String name;
 
-	@Column
 	private String mobile_number;
 
-	@Column
 	private long create_dt;
+
+	private Collection<LoansDTO> loans;
 
 	public Integer getId() {
 		return id;
@@ -98,5 +81,13 @@ public class Customer {
 		this.create_dt = create_dt;
 	}
 
+	public Collection<LoansDTO> getLoans() {
+		return loans;
+	}
+
+	public void setLoans(Collection<LoansDTO> loans) {
+		this.loans = loans;
+	}
+	
 	
 }

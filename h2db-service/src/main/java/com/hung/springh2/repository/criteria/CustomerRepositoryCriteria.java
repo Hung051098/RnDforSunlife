@@ -56,4 +56,5 @@ public class CustomerRepositoryCriteria {
     	List<Customer> results = typedQuery.getResultList(); // trả về kết quả 
     	return results;
     }
+
 }

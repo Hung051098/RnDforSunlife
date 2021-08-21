@@ -22,6 +22,7 @@ public class LoansServicerImpl implements LoansService {
 
 	@Autowired
 	LoansReponsitoryCriteria loansReponsitoryCriteria;
+	
 	@Autowired
 	CustomerRepositoryCriteria customerRepositoryCriteria;
 
@@ -55,7 +56,7 @@ public class LoansServicerImpl implements LoansService {
 
 		JSONObject data = new JSONObject();
 		try {
-			List<Loans> lst = loansReponsitoryCriteria.getListLoanByCustomerId2(id);
+			List<Loans> lst = loansReponsitoryCriteria.getListLoanByCustomerId(id);
 			List<JSONObject> lstcon = new ArrayList<>();
 			for (Loans loans : lst) {
 

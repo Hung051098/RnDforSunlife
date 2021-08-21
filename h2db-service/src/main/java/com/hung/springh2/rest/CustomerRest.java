@@ -1,5 +1,7 @@
 package com.hung.springh2.rest;
 
+import java.util.List;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hung.springh2.dto.response.CustomerDTO;
 import com.hung.springh2.request.AddCustomerRequest;
 import com.hung.springh2.service.CustomerService;
 
@@ -23,7 +26,7 @@ public class CustomerRest {
 	CustomerService customerService;
 
 	@GetMapping("/list_customer")
-	public JSONObject getListCustomer() {
+	public List<CustomerDTO> getListCustomer() {
 		return customerService.getListCustomer();
 	}
 
