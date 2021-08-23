@@ -15,8 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hung.springh2.dto.response.CustomerDTO;
+import com.hung.springh2.model.Customer;
 import com.hung.springh2.request.AddCustomerRequest;
 import com.hung.springh2.service.CustomerService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/customer")
@@ -29,7 +37,15 @@ public class CustomerRest {
 	public List<CustomerDTO> getListCustomer() {
 		return customerService.getListCustomer();
 	}
-
+	
+	@Operation(description = "Xem chi tiết Customer từ Id", responses = {
+            @ApiResponse(content = @Content(array = @ArraySchema(schema = @Schema(implementation = Customer.class))), responseCode = "200") })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode  = "200", description = "Thành công"),
+            @ApiResponse(responseCode  = "401", description = "Chưa xác thực"),
+            @ApiResponse(responseCode  = "403", description = "Truy cập bị cấm"),
+            @ApiResponse(responseCode  = "404", description = "Không tìm thấy")
+    })
 	@GetMapping("/get_customer_by_id")
 	public JSONObject getCustomerById(@RequestParam int id) {
 		return customerService.getCustomerById(id);

@@ -14,21 +14,18 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-public final class CustomerSpecification {
-    public static Specification<Customer> hasId(Integer name) {
-        return (root, query, cb) -> cb.equal(root.get(Customer_.ID), name);
-    }
+public final class LoansSpecification {
     
-    public static Specification<Customer> joinTable() {
-		return new Specification<Customer>(){
+    public static Specification<Loans> joinTable(int id) {
+		return new Specification<Loans>(){
 			@Override
-			public Predicate toPredicate(Root<Customer> root,
+			public Predicate toPredicate(Root<Loans> root,
                     CriteriaQuery<?> query,
                     CriteriaBuilder criteriaBuilder) {
-				Join<Customer, Loans> loanJoin = root.join(Customer_.LOANS);
+				Join<Loans, Customer> croot = root.join(Loans_.CUSTOMER);
 
 				System.out.println("b");
-				Predicate equalPredicate = criteriaBuilder.equal(root.get(Customer_.ID), loanJoin.get(Loans_.CUSTOMER));
+				Predicate equalPredicate = criteriaBuilder.equal(croot.get(Customer_.ID), id);
 				return equalPredicate;
 			}
 		};

@@ -71,7 +71,6 @@ public class CustomerServicerImpl implements CustomerService {
 	public JSONObject getCustomerById(int id) {
 
 		JSONObject data = new JSONObject();
-//		Customer custt = customerRepositoryCriteria.getCustomerById(id);
 		Specification<Customer> specification = Specification.where(CustomerSpecification.hasId(id));
 		Optional<Customer> cus = customerRepository.findOne(CustomerSpecification.hasId(id));
 		Customer custt = cus.get();

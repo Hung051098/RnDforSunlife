@@ -34,7 +34,7 @@ public class LoansReponsitoryCriteria {
 		 * croot.get("id") trong đó customer là tên biến của lớp Customer; 
 		 */
 		Join<Loans, Customer> croot = lroot.join("customer");
-		Predicate p2 = cb.equal(lroot.get("customer"), id);
+		Predicate p2 = cb.equal(croot.get("id"), id);
 		query.select(lroot)
 		.where(p2);
 		TypedQuery<Loans> typedQuery = em.createQuery(query); // query 

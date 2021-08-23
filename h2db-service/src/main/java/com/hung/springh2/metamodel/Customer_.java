@@ -16,7 +16,7 @@ public class Customer_ {
     public static volatile SingularAttribute<Customer, String> name;
     public static volatile SingularAttribute<Customer, String> mobile_number;
     public static volatile SingularAttribute<Customer, Long> create_dt;
-    public static volatile SetAttribute<Customer, Loans> loan;
+    public static volatile SetAttribute<Customer, Loans> loans;
 
 
     public static final String ID = "id";
@@ -26,7 +26,7 @@ public class Customer_ {
     public static final String NAME = "name";
     public static final String MOBILE_NUMBER = "mobile_number";
     public static final String CREATE_DATE = "create_dt";
-    public static final String LOANS = "loan";
+    public static final String LOANS = "loans";
 
 
 }
