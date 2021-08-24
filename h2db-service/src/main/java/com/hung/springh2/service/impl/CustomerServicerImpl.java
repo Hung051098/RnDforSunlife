@@ -10,9 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
+import com.hung.springh2.dto.mapper.CustomerDetailMapper;
 import com.hung.springh2.dto.mapper.CustomerMapper;
 import com.hung.springh2.dto.response.CustomerDTO;
+import com.hung.springh2.dto.response.CustomerDetailDTO;
 import com.hung.springh2.model.Customer;
 import com.hung.springh2.repository.CustomerRepository;
 import com.hung.springh2.repository.criteria.CustomerRepositoryCriteria;
@@ -34,6 +35,8 @@ public class CustomerServicerImpl implements CustomerService {
 
 	@Autowired
 	private CustomerMapper customerMapper;
+	@Autowired
+	private CustomerDetailMapper customerDetailMapper;
 
 	@Override
 	public List<CustomerDTO> getListCustomer() {
@@ -46,8 +49,6 @@ public class CustomerServicerImpl implements CustomerService {
 			CustomerDTO dtoMap = customerMapper.mapperCustomer(cus);
 			lstCustomer.add(dtoMap);
 		}
-		System.out.println("a");
-		data.put("data", lstCustomer);
 		return lstCustomer;
 	}
 
@@ -120,5 +121,13 @@ public class CustomerServicerImpl implements CustomerService {
 		customerRepository.deleteById(id);
 		data.put("data", "success");
 		return data;
+	}
+	
+	@Override
+	public CustomerDetailDTO getCustomerDetail(int id) {
+		Specification<Customer> cusSpecific = Specification.where(CustomerSpecification.hasId(id));
+		Optional<Customer> customer = customerRepository.findOne(cusSpecific);
+		CustomerDetailDTO mapDTO = customerDetailMapper.mapperCustomer(customer.get());
+		return mapDTO;
 	}
 }

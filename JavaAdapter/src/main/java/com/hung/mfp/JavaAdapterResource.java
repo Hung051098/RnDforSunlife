@@ -7,8 +7,10 @@
 
 package com.hung.mfp;
 
+import java.util.Enumeration;
 import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -17,6 +19,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+
+import org.apache.http.HttpRequest;
 
 import com.hung.mfp.request.ConsumersRequest;
 import com.ibm.json.java.JSONObject;
@@ -42,7 +46,42 @@ public class JavaAdapterResource {
 	// Inject the MFP configuration API:
 	@Context
 	ConfigurationAPI configApi;
-
+	
+	@Context
+	HttpServletRequest httpRequest;
+	
+	
+	@GET
+	@Path("/getRequestHeader")
+	public String getRequestHeader() {
+		String response = "";
+		Enumeration<String> e = httpRequest.getHeaderNames();
+		while (e.hasMoreElements()) {
+			String headerName = e.nextElement();
+			String headerValue = httpRequest.getHeader(headerName);
+			response += headerName + "/n/n"+ headerValue;
+		}
+		return response;
+	}
+//	@GET
+//	@Path("/getRequestHeader")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@OAuthSecurity(enabled = false)
+//	public JSONObject getRequestHeader() {
+//		String headerName = "";
+//		String headerValue = "";
+//		Enumeration<String> e = httpRequest.getHeaderNames();
+//		while (e.hasMoreElements()) {
+//			headerName = e.nextElement();
+//			headerValue = httpRequest.getHeader(headerName);
+//		}
+//		JSONObject data = new JSONObject();
+//		data.put("headerName", headerName);
+//		data.put("headerValue", headerValue);
+//		return data;
+//	}
+	
+	
 
 	@ApiOperation(value = "Custom Scope Protection", notes = "Example of a resource that is protected by a custom scope. To access this resource a valid token for the scope 'myCustomScope' must be acquired.")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "A constant string is returned") })
@@ -53,7 +92,15 @@ public class JavaAdapterResource {
 	public String helloHung() {
 		return "Hello my name Hùng!";
 	}
-	
+	@GET
+	@Path("/test1")
+	@Produces(MediaType.APPLICATION_JSON) // trả về Text
+	@OAuthSecurity(enabled = false)
+	public JSONObject helloHung1() {
+		JSONObject data = new JSONObject();
+		data.put("data", "Hello my name Hùng!");
+		return data;
+	}
 	@GET
 	@Path("/test_json")
 	@Produces(MediaType.APPLICATION_JSON)// trả về Json

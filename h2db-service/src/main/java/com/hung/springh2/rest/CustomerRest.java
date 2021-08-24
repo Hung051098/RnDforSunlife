@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hung.springh2.dto.response.CustomerDTO;
+import com.hung.springh2.dto.response.CustomerDetailDTO;
 import com.hung.springh2.model.Customer;
 import com.hung.springh2.request.AddCustomerRequest;
 import com.hung.springh2.service.CustomerService;
@@ -71,4 +72,9 @@ public class CustomerRest {
     public JSONObject deleteUser(@PathVariable("id") Integer id) {
 		return customerService.deleteById(id);
     }
+
+	@GetMapping("/get_customer_detail")
+	public CustomerDetailDTO getCustomerDetail(@RequestParam int id) {
+		return customerService.getCustomerDetail(id);
+	}
 }

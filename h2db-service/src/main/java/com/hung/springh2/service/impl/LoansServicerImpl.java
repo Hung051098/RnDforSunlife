@@ -6,17 +6,15 @@ import java.util.List;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.hung.springh2.model.Customer;
 import com.hung.springh2.model.Loans;
+import com.hung.springh2.repository.CustomerRepository;
 import com.hung.springh2.repository.LoansRepository;
 import com.hung.springh2.repository.criteria.CustomerRepositoryCriteria;
-import com.hung.springh2.repository.criteria.CustomerSpecification;
 import com.hung.springh2.repository.criteria.LoansReponsitoryCriteria;
-import com.hung.springh2.repository.criteria.LoansSpecification;
 import com.hung.springh2.service.LoansService;
 import com.hung.springh2.util.ConvertUtils;
 
@@ -31,7 +29,10 @@ public class LoansServicerImpl implements LoansService {
 
 	@Autowired
 	LoansRepository loansReponsitory;
-
+	
+	@Autowired
+	CustomerRepository customerReponsitory;
+	
 	@Override
 	public JSONObject addLoansByCustomerId(int id) {
 		JSONObject data = new JSONObject();
@@ -60,16 +61,16 @@ public class LoansServicerImpl implements LoansService {
 		JSONObject data = new JSONObject();
 		try {
 //			List<Loans> lst = loansReponsitoryCriteria.getListLoanByCustomerId(id);
-			Specification<Loans> specification = Specification.where(LoansSpecification.joinTable(id));
+//			Specification<Loans> specification = Specification.where(LoansSpecification.joinTable(id));
 			
-			List<Loans> lst = loansReponsitory.findAll(specification);
+			List<Customer> lst = customerReponsitory.findAll();
 			
 			List<JSONObject> lstcon = new ArrayList<>();
-			for (Loans loans : lst) {
+			for (Customer customer : lst) {
 
 				JSONObject con = new JSONObject();
-				con.put("id", loans.getId());
-				con.put("getCustomer", loans.getCustomer().getId());
+				con.put("id", customer.getId());
+				con.put("size", customer.getLoans().size());
 				lstcon.add(con);
 			}
 			data.put("data", lstcon);

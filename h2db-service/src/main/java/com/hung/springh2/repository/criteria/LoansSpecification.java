@@ -1,18 +1,17 @@
 package com.hung.springh2.repository.criteria;
 
-import com.hung.springh2.metamodel.Customer_;
-import com.hung.springh2.metamodel.Loans_;
-import com.hung.springh2.model.Customer;
-import com.hung.springh2.model.Loans;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
-import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
+
+import com.hung.springh2.model.Customer;
+import com.hung.springh2.model.Customer_;
+import com.hung.springh2.model.Loans;
+import com.hung.springh2.model.Loans_;
 
 public final class LoansSpecification {
     

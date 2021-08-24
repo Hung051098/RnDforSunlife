@@ -26,4 +26,8 @@
 	<procedure name="getFeed"/><!-- hàm gọi api -->
 	<procedure name="unprotected" secured="false"/><!-- hàm gọi api secured="false" là ko check token -->
 
+	<procedure name="getTestJson"/><!-- hàm gọi api -->
+	
+	<procedure name="getTestJsonHasParameters"/><!-- hàm gọi api -->
+	
 </mfp:adapter>

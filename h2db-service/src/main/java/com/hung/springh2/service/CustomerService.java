@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 
 import com.hung.springh2.dto.response.CustomerDTO;
+import com.hung.springh2.dto.response.CustomerDetailDTO;
 import com.hung.springh2.request.AddCustomerRequest;
 
 @Service
@@ -22,5 +23,7 @@ public interface CustomerService {
 	JSONObject updateCustomerById(int id, AddCustomerRequest request);
 
 	JSONObject deleteById(Integer id);
+
+	CustomerDetailDTO getCustomerDetail(int id);
 
 }

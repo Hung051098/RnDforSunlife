@@ -1,57 +1,30 @@
-package com.hung.springh2.model;
+package com.hung.springh2.dto.response;
 
 import java.util.Collection;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import com.hung.springh2.model.Loans;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-@Entity
-@Table(name = "customer")
-
-public class Customer {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CustomerDetailDTO {
 	private Integer id;
-	
 
-	@Column
 	private String email;
 
-	@Column
 	private String role;
 
-	@Column
 	private String pwd;
 
-	@Column
 	private String name;
 
-	@Column
 	private String mobile_number;
 
-	@Column
 	private long create_dt;
-	
-	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
-	@Fetch(FetchMode.SUBSELECT)
-	private Collection<Loans> loans;
-	
+
+//	private Collection<LoansDTO> loans;
+
 	public Integer getId() {
 		return id;
 	}
@@ -108,12 +81,13 @@ public class Customer {
 		this.create_dt = create_dt;
 	}
 
-	public Collection<Loans> getLoans() {
-		return loans;
-	}
-
-	public void setLoans(Collection<Loans> loans) {
-		this.loans = loans;
-	}
-
+//	public Collection<LoansDTO> getLoans() {
+//		return loans;
+//	}
+//
+//	public void setLoans(Collection<LoansDTO> loans) {
+//		this.loans = loans;
+//	}
+	
+	
 }

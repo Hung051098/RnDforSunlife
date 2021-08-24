@@ -10,13 +10,33 @@
  * @returns json list of items.
  */
 
-function getFeed(tag) {
+function getFeed() {
 	var input = {
 	    method : 'get', // method http
 	    returnedContentType : 'json', // kiểu dữ liệu mà api được gọi trả về
 	    path : "mfp/api/adapters/JavaAdapter/api/test_json" // link api 
 	};
 
+	return MFP.Server.invokeHttp(input);
+}
+
+function getTestJson() {
+	
+	var input = {
+		adapter : 'JavaAdapter', // method http
+		procedure : 'api/test_json', // API của Adapter khác ở đây là JavaAdapter
+		parameted :[]
+	};
+	return MFP.Server.invokeProcedure(input);
+}
+
+function getTestJsonHasParameters() {
+	var name = "name"
+	var input = {
+			method : 'post', // method http
+		    returnedContentType : 'json', // kiểu dữ liệu mà api được gọi trả về
+		    path:"mfp/api/adapters/JavaAdapter/api/path_param/"+name
+	};
 	return MFP.Server.invokeHttp(input);
 }
 
