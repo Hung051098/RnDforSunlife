@@ -25,6 +25,7 @@
 		<org.projectlombok.version>1.18.20</org.projectlombok.version>
 		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 		<springdoc.version>1.1.49</springdoc.version>
+		<keycloak-adapter-bom.version>12.0.4</keycloak-adapter-bom.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -118,6 +119,15 @@
 			<version>1.0.4</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.keycloak</groupId>
+			<artifactId>keycloak-spring-boot-starter</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -166,6 +176,14 @@
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
 				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.keycloak.bom</groupId>
+				<artifactId>keycloak-adapter-bom</artifactId>
+				<version>${keycloak-adapter-bom.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

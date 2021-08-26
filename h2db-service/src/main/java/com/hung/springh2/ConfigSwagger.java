@@ -15,7 +15,8 @@ public class ConfigSwagger {
         return new OpenAPI()
                 // Thiết lập các server dùng để test api
                 .servers(Lists.newArrayList(
-                        new Server().url("http://localhost:10005")
+                        new Server().url("http://localhost:10005"),
+                        new Server().url("http://localhost:22001")
                 ))
                 // info
                 .info(new Info().title("Loda Application API")
