@@ -74,6 +74,8 @@ public class AuthorizationServerConfig {
 				.authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
 				.redirectUri("http://127.0.0.1:8080/login/oauth2/code/messaging-client-oidc")
 				.redirectUri("http://127.0.0.1:8080/authorized")
+				.redirectUri("http://127.0.0.1:10009/login/oauth2/code/messaging-client-oidc")
+				.redirectUri("http://127.0.0.1:10009/authorized")
 				.scope(OidcScopes.OPENID)
 				.scope("message.read")
 				.scope("message.write")
