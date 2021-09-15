@@ -2,7 +2,7 @@
 	xsi:noNamespaceSchemaLocation="ehcache.xsd">
 	<!-- <diskStore path="java.io.tmpdir" --> />
 
-	<cache name="appprop" maxEntriesLocalHeap="50"
+	<cache name="token" maxEntriesLocalHeap="50"
 		maxEntriesLocalDisk="500" eternal="false" diskSpoolBufferSizeMB="20"
 		timeToIdleSeconds="86400" timeToLiveSeconds="86400"
 		memoryStoreEvictionPolicy="LFU" transactionalMode="off">

@@ -1,10 +1,10 @@
-package com.example.oauth2service;
+package com.hung.oauthserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Oauth2ServiceApplicationTests {
+class OauthserverApplicationTests {
 
 	@Test
 	void contextLoads() {

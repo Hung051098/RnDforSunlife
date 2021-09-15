@@ -5,6 +5,8 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.hung.springadapter.data.Customer;
+import com.hung.springadapter.ehcacheentities.EhCacheEntities;
+import com.ibm.json.java.JSONObject;
 
 public class EhCache {
 
@@ -12,14 +14,22 @@ public class EhCache {
 	CacheManager cacheManager;
 
 	@Cacheable(value = "customer")
-	public Customer loadCustomer(Long id) {
-		System.out.println("cacheName: " + cacheManager.getCacheNames());
-		System.out.println("hungggggggggg");
+	public Customer loadCustomer() {
+		System.out.println("Loading to Ehcache .....");
 		Customer customer = new Customer();
-		customer.setCustomerId(id);
-		customer.setFirstName("Test");
-		customer.setLastName("User");
-		customer.setEmail("contact-us@javadevjournlal.com");
+		customer.setCustomerId(1l);
+		customer.setFirstName("Lê");
+		customer.setLastName("Hùng");
+		customer.setEmail("hungglevan@gmail.com");
 		return customer;
+	}
+
+	@Cacheable(value = "token")
+	public EhCacheEntities loadToCache(Object obj, Object objAuthServer) {
+		System.out.println("Loading to Ehcache .....");
+		EhCacheEntities e = new EhCacheEntities();
+		e.setTokenAuth(objAuthServer);
+		e.setTokenMfp(obj);
+		return e;
 	}
 }
