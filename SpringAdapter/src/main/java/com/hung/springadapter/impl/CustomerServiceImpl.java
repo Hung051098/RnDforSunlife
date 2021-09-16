@@ -44,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public JSONObject getCustomer(String authTokenHeader) {
 		Customer cus = new Customer();
 		for (int i = 0; i < 5; i++) {
-			cus = ehcache.loadCustomer();
+			ehcache.putCustomerToCache();
 			System.out.println("email: " + cus.getEmail());
 		}
 		JSONObject data = new JSONObject();
@@ -81,11 +81,12 @@ public class CustomerServiceImpl implements CustomerService {
 		        String result = EntityUtils.toString(entity);
 		        org.json.JSONObject obj = new org.json.JSONObject(result);
 		        System.out.println(result);
-				JSONObject objAuthServer = this.loginAuthorizationServer(re);
-				for (int i = 0; i < 5; i++) {
+		        org.json.JSONObject objAuthServer = this.loginAuthorizationServer(re);
+				System.out.println("en =access_token====>: "+ objAuthServer.get("access_token"));
+//				for (int i = 0; i < 5; i++) {
 					EhCacheEntities en = ehcache.loadToCache(obj.get("access_token"), objAuthServer.get("access_token"));
 					System.out.println("en ======>: " + new Gson().toJson(en));
-				}
+//				}
 				data.put("access_token", obj.get("access_token"));
 				data.put("token_type", obj.get("token_type"));
 				data.put("expires_in", obj.get("expires_in"));
@@ -98,9 +99,9 @@ public class CustomerServiceImpl implements CustomerService {
 		return data;
 	}
 	
-	private JSONObject loginAuthorizationServer(LoginRequest re)
+	private org.json.JSONObject loginAuthorizationServer(LoginRequest re)
 	{
-		JSONObject data = new JSONObject();
+		org.json.JSONObject data = new org.json.JSONObject();
 		try {
 			String url = "http://localhost:9191/oauth/token";
 		    CloseableHttpClient client = HttpClients.createDefault();
@@ -126,6 +127,7 @@ public class CustomerServiceImpl implements CustomerService {
 			if (entity != null) {
 				String result = EntityUtils.toString(entity);
 				System.out.println(result);
+				data = new org.json.JSONObject(result);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
